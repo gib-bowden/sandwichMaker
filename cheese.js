@@ -1,5 +1,5 @@
 var Sandwich = (function (oldSandwich){
-	const cheeses = {"american": 0.50, "swiss": 0.75}
+	const cheeses = {"american": 0.10, "swiss": 0.15}
 	const selectedCheeses = []; 
 
 	oldSandwich.getCheeseNames = function() {
@@ -25,6 +25,21 @@ var Sandwich = (function (oldSandwich){
 				this.removeCheese(name);  
 			} 
 		});
+	}
+
+	oldSandwich.getSelectedCheeseCost = function() {
+		let cost; 
+		if (selectedCheeses.length !== 0) {
+			const prices = selectedCheeses.map((name) => {
+				return cheeses[name];
+			})
+			cost = prices.reduce((sum, price) => {
+				return sum + price
+			})
+		} else {
+			cost = 0; 
+		}
+		return cost; 
 	}
 
 	return oldSandwich

@@ -6,15 +6,11 @@ const populateBreads = () => {
 	breadContainer.addEventListener("change", (e) => {
 		if (e.target.checked === true) {
 			Sandwich.addBread(e.target.value);
-			console.log(selectedBreads)	
 		} else {
 			Sandwich.removeBread(e.target.value)
-			console.log(selectedBreads)
 		}
 	})
 }
-
-populateBreads();
 
 const populateMeats = () => {
 	const meatContainer = document.getElementById("meat-container");
@@ -23,17 +19,12 @@ const populateMeats = () => {
 	}
 	meatContainer.addEventListener("change", (e) => {
 		if (e.target.checked === true) {
-			Sandwich.addMeat(e.target.value);
-			console.log(selectedMeats)	
+			Sandwich.addMeat(e.target.value);	
 		} else {
 			Sandwich.removeMeat(e.target.value)
-			console.log(selectedMeats)
 		}
 	})
 }
-
-populateMeats();
-
 
 const populateCondis = () => {
 	const condiContainer = document.getElementById("condiment-container");
@@ -43,16 +34,11 @@ const populateCondis = () => {
 	condiContainer.addEventListener("change", (e) => {
 		if (e.target.checked === true) {
 			Sandwich.addCondi(e.target.value);
-			console.log(selectedCondis)	
 		} else {
 			Sandwich.removeCondi(e.target.value)
-			console.log(selectedCondis)
 		}
 	})
 }
-
-populateCondis();
-
 
 const populateCheeses = () => {
 	const cheeseContainer = document.getElementById("cheese-container");
@@ -61,34 +47,54 @@ const populateCheeses = () => {
 	}
 	cheeseContainer.addEventListener("change", (e) => {
 		if (e.target.checked === true) {
-			Sandwich.addCheese(e.target.value);
-			console.log(selectedCheeses)	
+			Sandwich.addCheese(e.target.value);	
 		} else {
 			Sandwich.removeCheese(e.target.value)
-			console.log(selectedCheeses)
 		}
 	})
 }
-
-populateCheeses();
-
 
 const populateVeggies = () => {
 	const veggieContainer = document.getElementById("veggie-container");
 	for (let name of veggieNames) {
-		veggieContainer.innerHTML += `<label class="checkbox-inline"><input type="checkbox" value="${name}">${name}</label>`
+		veggieContainer.innerHTML += `<label class="checkbox-inline"><input type="checkbox" autocomplete="off" value="${name}">${name}</label>`
 	}
 	veggieContainer.addEventListener("change", (e) => {
 		if (e.target.checked === true) {
-			Sandwich.addVeggie(e.target.value);
-			console.log(selectedVeggies)	
+			Sandwich.addVeggie(e.target.value);	
 		} else {
 			Sandwich.removeVeggie(e.target.value)
-			console.log(selectedVeggies)
 		}
 	})
 }
 
-populateVeggies();
+const calculateTotalCost = () => {
+	let breadCost = Sandwich.getSelectedBreadCost();
+	let cheeseCost = Sandwich.getSelectedCheeseCost();
+	let condiCost = Sandwich.getSelectedCondiCost();
+	let meatCost = Sandwich.getSelectedMeatCost();
+	let veggieCost = Sandwich.getSelectedVeggieCost();
+	let totalCost = (breadCost + cheeseCost + condiCost + meatCost + veggieCost)
+	return totalCost;
+}
 
-document.getElementById("complete-order-btn").addEventListener("click", Sandwich.getSelectedBreadCost)
+const loadPage = () => {
+	populateBreads();
+	populateMeats();
+	populateCondis();
+	populateCheeses();
+	populateVeggies();
+}
+
+const showSelected = () => {
+	let totalCost = calculateTotalCost(); 
+	document.getElementById("bread-selections").innerHTML = selectedBreads.join(', ');
+	document.getElementById("meat-selections").innerHTML = selectedMeats.join(', '); 
+	document.getElementById("cheese-selections").innerHTML = selectedCheeses.join(', '); 
+	document.getElementById("veggie-selections").innerHTML = selectedVeggies.join(', '); 
+	document.getElementById("condiment-selections").innerHTML = selectedCondis.join(', '); 
+	document.getElementById("total-cost").innerHTML = totalCost;    
+}
+
+window.addEventListener("load", loadPage);
+document.getElementById("order-container").addEventListener("change", showSelected);

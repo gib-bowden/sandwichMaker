@@ -27,6 +27,20 @@ var Sandwich = (function (oldSandwich){
 		});
 	}
 
+	oldSandwich.getSelectedMeatCost = function() {
+		let cost; 
+		if (selectedMeats.length !== 0) {
+			const prices = selectedMeats.map((name) => {
+				return meats[name];
+			})
+			cost = prices.reduce((sum, price) => {
+				return sum + price 
+			})
+		} else {
+			cost = 0; 
+		}
+		return cost; 
+	}
 	return oldSandwich
 
 })(Sandwich || {})

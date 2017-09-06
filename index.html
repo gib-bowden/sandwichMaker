@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<title></title>
 </head>
 <body>
 	<div id="main"></div>
 		<div id="order-container">		
-			<div id="bread-container">Breads</div>
-			<div id="meat-container">Meats</div>
-			<div id="cheese-container">Cheeses</div>
-			<div id="condiment-container">Condiments</div>
-			<div id="veggie-container">Veggies</div>
-			<button id="complete-order-btn" type="button">Complete Order</button>
+			<div id="bread-container" class="checkbox">Breads:</div>
+			<div id="meat-container" class="checkbox">Meats:</div>
+			<div id="cheese-container" class="checkbox">Cheeses:</div>
+			<div id="veggie-container" class="checkbox">Veggies:</div>
+			<div id="condiment-container" class="checkbox">Condiments:</div>
 		</div>
-		<div id="final-order-container"></div>
+		<div id="final-order-container">
+			<p>Bread selections:</p>
+			<p id="bread-selections"></p>
+			<p>Meat selections:</p>
+			<p id="meat-selections"></p>
+			<p>Cheese selections:</p>
+			<p id="cheese-selections"></p>
+			<p>Veggie selections:</p>
+			<p id="veggie-selections"></p>
+			<p>Condiment selections:</p>
+			<p id="condiment-selections"></p>
+			<p>Price:</p>
+			<p id="total-cost"></p>
+		</div>
 </body>
 <script type="text/javascript" src="bread.js"></script>
 <script type="text/javascript" src="cheese.js"></script>
@@ -22,4 +35,9 @@
 <script type="text/javascript" src="meat.js"></script>
 <script type="text/javascript" src="veggies.js"></script>
 <script type="text/javascript" src="main.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </html>
