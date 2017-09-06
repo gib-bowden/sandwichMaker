@@ -91,5 +91,4 @@ const populateVeggies = () => {
 
 populateVeggies();
 
-
-
+document.getElementById("complete-order-btn").addEventListener("click", Sandwich.getSelectedBreadCost)

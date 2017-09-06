@@ -10,8 +10,15 @@ var Sandwich = (function (oldSandwich){
 		return selectedBreads;
 	}
 
-	oldSandwich.getBreadPrice = function(name) {
-		return bread[name]
+	oldSandwich.getSelectedBreadCost = function() {
+		const prices = selectedBreads.map((name) => {
+			return bread[name];
+		})
+		const cost = prices.reduce((sum, price) => {
+			return sum + price 
+
+		})
+		return console.log(cost); 
 	}
 
 	oldSandwich.addBread = function(name){
@@ -22,7 +29,7 @@ var Sandwich = (function (oldSandwich){
 		selectedBreads.forEach((bread, i) => {
 			if (bread === name) {
 				selectedBreads.splice(i, 1);
-				oldSandwich.removeBread(name);  
+				this.removeBread(name);  
 			} 
 		});
 	}
@@ -33,3 +40,4 @@ var Sandwich = (function (oldSandwich){
 
 breadNames = Sandwich.getBreadNames(); 
 selectedBreads = Sandwich.getSelectedBreads();
+

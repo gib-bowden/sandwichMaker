@@ -22,7 +22,7 @@ var Sandwich = (function (oldSandwich){
 		selectedCheeses.forEach((cheese, i) => {
 			if (cheese === name) {
 				selectedCheeses.splice(i, 1);
-				oldSandwich.removeCheese(name);  
+				this.removeCheese(name);  
 			} 
 		});
 	}
