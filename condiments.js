@@ -22,9 +22,24 @@ var Sandwich = (function (oldSandwich){
 		selectedCondis.forEach((condi, i) => {
 			if (condi === name) {
 				selectedCondis.splice(i, 1);
-				oldSandwich.removeCondi(name);  
+				this.removeCondi(name);  
 			} 
 		});
+	}
+
+	oldSandwich.getSelectedCondiCost = function() {
+		let cost; 
+		if (selectedCondis.length !== 0) {
+			const prices = selectedCondis.map((name) => {
+				return condis[name];
+			})
+			cost = prices.reduce((sum, price) => {
+				return sum + price 
+			})
+		} else {
+			cost = 0; 
+		}
+		return cost;
 	}
 
 	return oldSandwich

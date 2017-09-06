@@ -22,11 +22,25 @@ var Sandwich = (function (oldSandwich){
 		selectedMeats.forEach((meat, i) => {
 			if (meat === name) {
 				selectedMeats.splice(i, 1);
-				oldSandwich.removeMeat(name);  
+				this.removeMeat(name);  
 			} 
 		});
 	}
 
+	oldSandwich.getSelectedMeatCost = function() {
+		let cost; 
+		if (selectedMeats.length !== 0) {
+			const prices = selectedMeats.map((name) => {
+				return meats[name];
+			})
+			cost = prices.reduce((sum, price) => {
+				return sum + price 
+			})
+		} else {
+			cost = 0; 
+		}
+		return cost; 
+	}
 	return oldSandwich
 
 })(Sandwich || {})

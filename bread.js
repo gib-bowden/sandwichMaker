@@ -10,10 +10,6 @@ var Sandwich = (function (oldSandwich){
 		return selectedBreads;
 	}
 
-	oldSandwich.getBreadPrice = function(name) {
-		return bread[name]
-	}
-
 	oldSandwich.addBread = function(name){
 		selectedBreads.push(name);
 	}
@@ -22,9 +18,24 @@ var Sandwich = (function (oldSandwich){
 		selectedBreads.forEach((bread, i) => {
 			if (bread === name) {
 				selectedBreads.splice(i, 1);
-				oldSandwich.removeBread(name);  
+				this.removeBread(name);  
 			} 
 		});
+	}
+
+	oldSandwich.getSelectedBreadCost = function() {
+		let cost; 
+		if (selectedBreads.length !== 0) {
+			const prices = selectedBreads.map((name) => {
+				return bread[name];
+			})
+			cost = prices.reduce((sum, price) => {
+				return sum + price
+			})
+		} else {
+			cost = 0; 
+		}
+		return cost; 
 	}
 
 	return oldSandwich
@@ -33,3 +44,4 @@ var Sandwich = (function (oldSandwich){
 
 breadNames = Sandwich.getBreadNames(); 
 selectedBreads = Sandwich.getSelectedBreads();
+
