@@ -1,80 +1,76 @@
 const populateBreads = () => {
 	const breadContainer = document.getElementById("bread-container");
-	for (let name of breadNames) {
-		breadContainer.innerHTML += `<label class="checkbox-inline"><input type="checkbox" value="${name}">${name}</label>`
+	for (let name of breadNames.sort()) {
+		breadContainer.innerHTML += `<option data-subtext="$${Sandwich.getBreadPrice(name).toFixed(2)}" value="${name}">${name}</option>`
 	}
-	breadContainer.addEventListener("change", (e) => {
-		if (e.target.checked === true) {
-			Sandwich.addBread(e.target.value);
-		} else {
-			Sandwich.removeBread(e.target.value)
+	$("#bread-container").on('changed.bs.select', (e) => {
+		Sandwich.clearSelectedBreads();
+		for (option of e.target.selectedOptions) {
+			Sandwich.addBread(option.value)
 		}
-	})
+	});
 }
 
 const populateMeats = () => {
 	const meatContainer = document.getElementById("meat-container");
-	for (let name of meatNames) {
-		meatContainer.innerHTML += `<label class="checkbox-inline"><input type="checkbox" value="${name}">${name}</label>`
+	for (let name of meatNames.sort()) {
+		meatContainer.innerHTML += `<option data-subtext="$${Sandwich.getMeatPrice(name).toFixed(2)}" value="${name}">${name}</option>`
 	}
-	meatContainer.addEventListener("change", (e) => {
-		if (e.target.checked === true) {
-			Sandwich.addMeat(e.target.value);	
-		} else {
-			Sandwich.removeMeat(e.target.value)
+	$("#meat-container").on('changed.bs.select', (e) => {
+		Sandwich.clearSelectedMeats();
+		for (option of e.target.selectedOptions) {
+			Sandwich.addMeat(option.value)
 		}
-	})
+	});
 }
 
 const populateCondis = () => {
 	const condiContainer = document.getElementById("condiment-container");
-	for (let name of condiNames) {
-		condiContainer.innerHTML += `<label class="checkbox-inline"><input type="checkbox" value="${name}">${name}</label>`
+	for (let name of condiNames.sort()) {
+		condiContainer.innerHTML += `<option data-subtext="$${Sandwich.getCondiPrice(name).toFixed(2)}" value="${name}">${name}</option>`
 	}
-	condiContainer.addEventListener("change", (e) => {
-		if (e.target.checked === true) {
-			Sandwich.addCondi(e.target.value);
-		} else {
-			Sandwich.removeCondi(e.target.value)
+	$("#condiment-container").on('changed.bs.select', (e) => {
+		Sandwich.clearSelectedCondis();
+		for (option of e.target.selectedOptions) {
+			Sandwich.addCondi(option.value)
 		}
-	})
+	});
 }
 
 const populateCheeses = () => {
 	const cheeseContainer = document.getElementById("cheese-container");
-	for (let name of cheeseNames) {
-		cheeseContainer.innerHTML += `<label class="checkbox-inline"><input type="checkbox" value="${name}">${name}</label>`
+	for (let name of cheeseNames.sort()) {
+		cheeseContainer.innerHTML += `<option data-subtext="$${Sandwich.getCheesePrice(name).toFixed(2)}" value="${name}">${name}</option>`
 	}
-	cheeseContainer.addEventListener("change", (e) => {
-		if (e.target.checked === true) {
-			Sandwich.addCheese(e.target.value);	
-		} else {
-			Sandwich.removeCheese(e.target.value)
+	$("#cheese-container").on('changed.bs.select', (e) => {
+		Sandwich.clearSelectedCheeses();
+		for (option of e.target.selectedOptions) {
+			Sandwich.addCheese(option.value)
 		}
-	})
+	});
 }
 
 const populateVeggies = () => {
 	const veggieContainer = document.getElementById("veggie-container");
-	for (let name of veggieNames) {
-		veggieContainer.innerHTML += `<label class="checkbox-inline"><input type="checkbox" autocomplete="off" value="${name}">${name}</label>`
+	for (let name of veggieNames.sort()) {
+		veggieContainer.innerHTML += `<option data-subtext="$${Sandwich.getVeggiePrice(name).toFixed(2)}" value="${name}">${name}</option>`
 	}
-	veggieContainer.addEventListener("change", (e) => {
-		if (e.target.checked === true) {
-			Sandwich.addVeggie(e.target.value);	
-		} else {
-			Sandwich.removeVeggie(e.target.value)
+	$("#veggie-container").on('changed.bs.select', (e) => {
+		Sandwich.clearSelectedVeggies();
+		for (option of e.target.selectedOptions) {
+			Sandwich.addVeggie(option.value)
 		}
-	})
+	});
 }
 
-const calculateTotalCost = () => {
+const calculateTotalCost = () => {	
 	let breadCost = Sandwich.getSelectedBreadCost();
 	let cheeseCost = Sandwich.getSelectedCheeseCost();
 	let condiCost = Sandwich.getSelectedCondiCost();
 	let meatCost = Sandwich.getSelectedMeatCost();
 	let veggieCost = Sandwich.getSelectedVeggieCost();
 	let totalCost = (breadCost + cheeseCost + condiCost + meatCost + veggieCost)
+	document.getElementById("total-cost").innerHTML = `Sandwich Price: $${totalCost.toFixed(2)}`; 
 	return totalCost;
 }
 
@@ -86,15 +82,5 @@ const loadPage = () => {
 	populateVeggies();
 }
 
-const showSelected = () => {
-	let totalCost = calculateTotalCost(); 
-	document.getElementById("bread-selections").innerHTML = selectedBreads.join(', ');
-	document.getElementById("meat-selections").innerHTML = selectedMeats.join(', '); 
-	document.getElementById("cheese-selections").innerHTML = selectedCheeses.join(', '); 
-	document.getElementById("veggie-selections").innerHTML = selectedVeggies.join(', '); 
-	document.getElementById("condiment-selections").innerHTML = selectedCondis.join(', '); 
-	document.getElementById("total-cost").innerHTML = totalCost;    
-}
-
 window.addEventListener("load", loadPage);
-document.getElementById("order-container").addEventListener("change", showSelected);
+document.getElementById("order-container").addEventListener("change", calculateTotalCost);

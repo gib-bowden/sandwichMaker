@@ -1,30 +1,25 @@
 var Sandwich = (function (oldSandwich){
 	const condis = {"ketchup": 0.50, "mayo": 0.75}
-	const selectedCondis = []; 
+	let selectedCondis = []; 
 
 	oldSandwich.getCondiNames = function() {
 		return Object.keys(condis);
+	}
+
+	oldSandwich.getCondiPrice = function(name) {
+		return condis[name];
 	}
 
 	oldSandwich.getSelectedCondis = function() {
 		return selectedCondis;
 	}
 
-	oldSandwich.getCondiPrice = function(name) {
-		return condis[name]
-	}
-
 	oldSandwich.addCondi = function(name){
 		selectedCondis.push(name);
 	}
 
-	oldSandwich.removeCondi = function(name){
-		selectedCondis.forEach((condi, i) => {
-			if (condi === name) {
-				selectedCondis.splice(i, 1);
-				this.removeCondi(name);  
-			} 
-		});
+	oldSandwich.clearSelectedCondis = function() {
+		selectedCondis = []; 
 	}
 
 	oldSandwich.getSelectedCondiCost = function() {
@@ -47,4 +42,3 @@ var Sandwich = (function (oldSandwich){
 })(Sandwich || {})
 
 condiNames = Sandwich.getCondiNames(); 
-selectedCondis = Sandwich.getSelectedCondis();
