@@ -1,9 +1,13 @@
 var Sandwich = (function (oldSandwich){
-	const bread = {"white": 0.50, "wheat": 0.75}
-	const selectedBreads = []; 
+	const bread = {"Brioche": 0.50, "Baguette": 0.50, "Sourdough": 0.50, "Wrap": 0.50, "Naked": 1.00}
+	let selectedBreads = []; 
 
 	oldSandwich.getBreadNames = function() {
 		return Object.keys(bread);
+	}
+
+	oldSandwich.getBreadPrice = function(name) {
+		return bread[name];
 	}
 
 	oldSandwich.getSelectedBreads = function() {
@@ -14,13 +18,8 @@ var Sandwich = (function (oldSandwich){
 		selectedBreads.push(name);
 	}
 
-	oldSandwich.removeBread = function(name){
-		selectedBreads.forEach((bread, i) => {
-			if (bread === name) {
-				selectedBreads.splice(i, 1);
-				this.removeBread(name);  
-			} 
-		});
+	oldSandwich.clearSelectedBreads = function() {
+		selectedBreads = []; 
 	}
 
 	oldSandwich.getSelectedBreadCost = function() {
@@ -42,6 +41,4 @@ var Sandwich = (function (oldSandwich){
 
 })(Sandwich || {})
 
-breadNames = Sandwich.getBreadNames(); 
-selectedBreads = Sandwich.getSelectedBreads();
-
+const breadNames = Sandwich.getBreadNames(); 

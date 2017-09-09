@@ -1,30 +1,25 @@
 var Sandwich = (function (oldSandwich){
 	const veggies = {"lettuce": 0.50, "tomato": 0.75}
-	const selectedVeggies = []; 
+	let selectedVeggies = []; 
 
 	oldSandwich.getVeggieNames = function() {
 		return Object.keys(veggies);
+	}
+
+	oldSandwich.getVeggiePrice = function(name) {
+		return veggies[name];
 	}
 
 	oldSandwich.getSelectedVeggies = function() {
 		return selectedVeggies;
 	}
 
-	oldSandwich.getVeggiePrice = function(name) {
-		return veggies[name]
-	}
-
 	oldSandwich.addVeggie = function(name){
 		selectedVeggies.push(name);
 	}
 
-	oldSandwich.removeVeggie = function(name){
-		selectedVeggies.forEach((veggie, i) => {
-			if (veggie === name) {
-				selectedVeggies.splice(i, 1);
-				this.removeVeggie(name);  
-			} 
-		});
+	oldSandwich.clearSelectedVeggies = function() {
+		selectedVeggies = []; 
 	}
 
 	oldSandwich.getSelectedVeggieCost = function() {
